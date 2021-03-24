@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
+
+import ListLocations from './containers/ListLocations';
 import reportWebVitals from './reportWebVitals';
+import theme from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ListLocations />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
