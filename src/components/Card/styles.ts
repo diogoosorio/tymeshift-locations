@@ -1,28 +1,39 @@
 import styled, { css } from 'styled-components';
 
 import MuiCard from '@material-ui/core/Card';
+import MuiCardActionArea from '@material-ui/core/CardActionArea';
 import MuiCardHeader from '@material-ui/core/CardHeader';
 import MuiCardContent from '@material-ui/core/CardContent';
 
 import Pencil from '../../icons/Pencil';
 
 const transition = css`
-  transition-duration: 0.5;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in;
 `;
 
 const Card = styled(MuiCard)`
-  ${transition}
-  transition-property: background-color;
-
   position: relative;
-  padding: 15px 25px 15px 25px;
-  background-color: rgba(246, 246, 246, 0.2);
   border-color: rgba(0, 11, 22, 0.1);
   border-width: 1px;
   border-radius: 2px;
+`;
 
-  :hover {
+const CardActionArea = styled(MuiCardActionArea)`
+  ${transition}
+  transition-property: background-color;
+
+  width: 100%;
+  height: 100%;
+  padding: 15px 25px 15px 25px;
+  background-color: rgba(246, 246, 246, 0.2);
+
+  &.Mui-focusVisible .MuiCardActionArea-focusHighlight {
+    opacity: 0;
+  }
+
+  :hover,
+  :focus {
     background-color: rgb(246, 246, 246);
   }
 `;
@@ -62,13 +73,15 @@ const IconContainer = styled.div`
   border-radius: 50%;
   opacity: 0;
 
-  ${Card}:hover & {
+  ${CardActionArea}:hover &,
+  ${CardActionArea}:focus & {
     opacity: 1;
   }
 `;
 
 export {
   Card,
+  CardActionArea,
   CardHeader,
   CardContent,
   PencilIcon,

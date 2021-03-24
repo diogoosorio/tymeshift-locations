@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import * as S from './styles';
-import HeaderProps from './types';
+import { HeaderProps } from './types';
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => (
   <S.Header>

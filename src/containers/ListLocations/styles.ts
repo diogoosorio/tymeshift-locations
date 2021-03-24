@@ -16,9 +16,7 @@ const CardList = styled.div`
 `;
 
 const Card = styled(CardComponent)`
-  max-width: 340px;
   width: 340px;
-  min-height: 139px;
   margin: 25px 25px 0 0;
 `;
 

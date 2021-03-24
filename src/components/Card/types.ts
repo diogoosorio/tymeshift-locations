@@ -1,5 +1,7 @@
 interface CardProps {
-  className?: string
+  className?: string;
+  title: string;
+  onClick: () => void;
 }
 
 export type { CardProps };

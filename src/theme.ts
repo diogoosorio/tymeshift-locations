@@ -7,7 +7,7 @@ const theme = createMuiTheme({
       default: '#fff',
     },
     text: {
-      primary: '#001122',
+      primary: 'rgba(0, 17, 34, 0.8)',
     },
   },
   typography: {
@@ -23,10 +23,20 @@ const theme = createMuiTheme({
       fontSize: '0.875rem',
       lineHeight: 1.714,
     },
+    body1: {
+      fontSize: '0.875rem',
+      fontWeight: 500,
+      lineHeight: 1.714,
+    },
     h1: {
       fontWeight: 600,
       fontSize: '1.375rem',
       lineHeight: 1.273,
+    },
+    h5: {
+      fontWeight: 700,
+      fontSize: '1.125rem',
+      lineHeight: 1.778,
     },
     subtitle1: {
       fontWeight: 700,

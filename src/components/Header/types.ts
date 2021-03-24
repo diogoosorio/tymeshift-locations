@@ -1,4 +1,6 @@
-export default interface HeaderProps {
+interface HeaderProps {
   title: string
   subtitle?: string
-};
+}
+
+export type { HeaderProps };
