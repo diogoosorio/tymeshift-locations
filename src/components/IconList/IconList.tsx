@@ -3,17 +3,19 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 
 import * as S from './styles';
-import { IconListProps } from './types';
+import { IconListItemProps, IconListProps } from './types';
 
-const IconList: React.FC<IconListProps> = ({ items, className }) => (
+const IconListItem: React.FC<IconListItemProps> = ({ icon, text }) => (
+  <ListItem disableGutters>
+    <S.ListItemIcon>{icon}</S.ListItemIcon>
+    <S.ListItemText primary={text} primaryTypographyProps={{ variant: 'body1' }} />
+  </ListItem>
+);
+
+const IconList: React.FC<IconListProps> = ({ children, className }) => (
   <S.List className={className} disablePadding>
-    {items.map(({ key, icon, text }) => (
-      <ListItem key={key} disableGutters>
-        <S.ListItemIcon>{icon}</S.ListItemIcon>
-        <S.ListItemText primary={text} primaryTypographyProps={{ variant: 'body1' }} />
-      </ListItem>
-    ))}
+    {children}
   </S.List>
 );
 
-export default IconList;
+export default Object.assign(IconList, { Item: IconListItem });

@@ -1,24 +1,18 @@
 import React from 'react';
 
-import Typography from '@material-ui/core/Typography';
+import { Typography } from '@material-ui/core';
 
 import { CardProps } from './types';
 import * as S from './styles';
 
-const EditCardIcon: React.FC = () => (
-  <S.IconContainer>
-    <S.PencilIcon />
-  </S.IconContainer>
-);
-
 const Card: React.FC<CardProps> = ({
-  className, title, children, onClick,
+  className, title, children, actionIcon, onClick,
 }) => (
   <S.Card className={className} variant="outlined">
     <S.CardActionArea onClick={onClick}>
       <S.CardHeader
         title={<Typography variant="h5" component="h5">{title}</Typography>}
-        action={<EditCardIcon />}
+        action={actionIcon ? <S.IconContainer>{actionIcon}</S.IconContainer> : undefined}
         disableTypography
       />
       <S.CardContent>

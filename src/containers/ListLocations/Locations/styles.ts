@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-import CardComponent from '../../components/Card';
+import Button from '@material-ui/core/Button';
 
-const Content = styled.div`
+import CardComponent from '../../../components/Card';
+
+const Container = styled.div`
   padding: 25px 60px;
 `;
 
@@ -20,4 +22,13 @@ const Card = styled(CardComponent)`
   margin: 25px 25px 0 0;
 `;
 
-export { Content, Card, CardList };
+const RetryButton = styled(Button)`
+  text-transform: none;
+`;
+
+export {
+  Container,
+  Card,
+  CardList,
+  RetryButton,
+};

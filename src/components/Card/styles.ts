@@ -5,8 +5,6 @@ import MuiCardActionArea from '@material-ui/core/CardActionArea';
 import MuiCardHeader from '@material-ui/core/CardHeader';
 import MuiCardContent from '@material-ui/core/CardContent';
 
-import Pencil from '../../icons/Pencil';
-
 const transition = css`
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
@@ -55,11 +53,6 @@ const CardContent = styled(MuiCardContent)`
   margin-top: 5px;
 `;
 
-const PencilIcon = styled(Pencil)`
-  width: 14px;
-  height: 14px;
-`;
-
 const IconContainer = styled.div`
   ${transition}
   transition-property: opacity;
@@ -77,6 +70,11 @@ const IconContainer = styled.div`
   ${CardActionArea}:focus & {
     opacity: 1;
   }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 export {
@@ -84,6 +82,5 @@ export {
   CardActionArea,
   CardHeader,
   CardContent,
-  PencilIcon,
   IconContainer,
 };

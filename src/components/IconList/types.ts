@@ -1,14 +1,13 @@
 import { IconProps } from '../../icons';
 
-interface IconListItem {
-  key: string;
+interface IconListItemProps {
   icon: React.ReactElement<IconProps>;
   text: string;
 }
 
 interface IconListProps {
   className?: string;
-  items: Array<IconListItem>,
+  children: React.ReactElement<IconListItemProps>[];
 }
 
-export type { IconListProps, IconListItem };
+export type { IconListProps, IconListItemProps };

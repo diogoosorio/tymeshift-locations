@@ -1,2 +1,2 @@
 export { default } from './IconList';
-export type { IconListProps, IconListItem } from './types';
+export type { IconListProps, IconListItemProps } from './types';
