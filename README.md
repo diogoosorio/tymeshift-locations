@@ -1,46 +1,81 @@
-# Getting Started with Create React App
+# Tymeshift Locations
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Github Actions](https://github.com/diogoosorio/tymeshift-locations/workflows/CI/CD/badge.svg)
 
-## Available Scripts
+https://diogoosorio.github.io/tymeshift-locations
 
-In the project directory, you can run:
+This was my submission to the [Tymeshift recruitment challenge](https://github.com/Tymeshift/react-code-test).
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Running the Application
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This is pretty much a vanilla create-react-app, so what you're used to with `react-scripts` works:
 
-### `yarn test`
+* `yarn start` - starts the development server
+* `yarn test` - runs the test suite
+* `yarn build` - creates a production-grade build of the app
+* `yarn lint` - runs the linter agains the codebase
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Linting and tests are enforced via the CI server (Github Actions).
 
-### `yarn build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Hopefully the approach isn't hard to follow, but I've stick with this structure:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+src/
+├── components
+│   ├── Header
+│   ├── LoadError
+│   ├── LocationCard
+│   ├── LocationIcons
+│   └── LocationModal
+├── containers
+│   └── ListLocations
+├── icons
+├── infrastructure
+└── services
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Where:
 
-### `yarn eject`
+* `src/components` - this directory contains a set of presentational components, each with an arbitrary level of granularity (the project is small, I saw no reason to overcomplicate things).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* `src/containers` - components with most of the applicational logic/state.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* `src/icons` - I've turned all the icon assets (SVG) into components and grouped them together here (usually this leads to a icon library being refactored out at some point or something like that).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* `src/services` - this'd where most of the actual domain logic of the app lives (validation, persistence, data retrieval, ...)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Remarks & Next Steps
 
-## Learn More
+I don't do this kind of work a lot, so for time sake I stuck with I'm familiar with (the stack I'm more comfortable with):
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* [create-react-app](https://create-react-app.dev/) was used as the app boilerplate
+* [material-ui](https://material-ui.com/) was used as the foundation for UI
+* [styled-components](https://github.com/styled-components/styled-components) to style the components
+* [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/) to test the components
+* [react-router](https://github.com/ReactTraining/react-router) to enable shareable URLs for the locations
+* [luxon](https://moment.github.io/luxon/) to deal with the date parsing/formatting
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+With more time (and in a real World scenario), I'd probably focus on the following things:
+
+* Discuss the number of typography variations for such a small screen with the designer. There's probably a pattern there, but I couldn't even understand using Sketch what each variation of text really was (e.g. `h2` == `line-height: Y`, `font-size: Z`)
+
+* With that information refactor the [theme](./src/theme.ts) in this regard, I've cheated a bit there around typography. :)
+
+* This [query hook](./src/containers/ListLocations/hooks.ts) which was heavily inspired by Apollo's query hooks. There's probably a simpler/better way (or even some known library that does this with axios for me).
+
+* Work on the [app's telemetry](./src/infrastructure/logging.ts) as well as introducing a global unhandled error treatment logic.
+
+* Improve the HTTP client by introducing a retry policy for queries like the one I've built for the challenge.
+
+## Open Questions
+
+I've faced some questions during the challenge that I've plowed through, but in a real World scenario I'd definitely ask around aobut their logic:
+
+* The UI has a "number of views" counter that I couldn't determine where the corresponding data should come from, so I omitted that field.
+
+* The same for the location time thing. I've used the `createdAt` property from the API, but seemed a bit random showing the time the location was created, but without the corresponding date (?).
+
+And I think that's it. Thanks for reading this through. :)

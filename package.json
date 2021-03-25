@@ -2,6 +2,7 @@
   "name": "tymeshift-locations",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://diogoosorio.github.io/tymeshift-locations",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.57",
@@ -30,8 +31,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "TZ=UTC react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "lint": "eslint src/*"
   },
   "browserslist": {
@@ -56,6 +59,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.4"
   }

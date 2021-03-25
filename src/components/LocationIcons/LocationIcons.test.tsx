@@ -25,7 +25,7 @@ describe('<LocationIcons />', () => {
       <LocationIcons location={location} />,
     );
 
-    expect(getIconsText(container)).toEqual(['10 Users', '9:24AM (GMT+01:00)']);
+    expect(getIconsText(container)).toEqual(['10 Users', '8:24AM (GMT+00:00)']);
   });
 
   describe('when the createdAt is undefined', () => {
