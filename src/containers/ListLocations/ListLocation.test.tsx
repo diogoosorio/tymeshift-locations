@@ -14,4 +14,17 @@ describe('<ListLocations />', () => {
       it.todo('re-triggers the the API request');
     });
   });
+
+  describe('when a location id is provided in the URL', () => {
+    it.todo('renders the location detail modal');
+  });
+
+  describe('when an invalid location id is provided in the URL', () => {
+    it.todo('redirects the user to the location list URL instead');
+  });
+
+  describe('when the user clicks on a location', () => {
+    it.todo('changes the URL to the detail page');
+    it.todo('renders the location detail modal');
+  });
 });

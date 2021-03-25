@@ -9,12 +9,12 @@ import {
   Users,
   Pencil,
 } from '../../../icons';
-import { useFetchLocations } from '../hooks';
 import IconList from '../../../components/IconList';
 import * as S from './styles';
+import { LocationProps } from './types';
 
-const Locations: React.FC<ReturnType<typeof useFetchLocations>> = ({
-  loading, data, error, refetch,
+const Locations: React.FC<LocationProps> = ({
+  loading, data, error, refetch, setLocation,
 }) => {
   if (error) {
     return (
@@ -37,7 +37,6 @@ const Locations: React.FC<ReturnType<typeof useFetchLocations>> = ({
             <S.Card key={`loading-card-${i}`} title={<Skeleton width="80%" />}>
               <Skeleton width="60%" />
               <Skeleton width="60%" />
-              <Skeleton width="60%" />
             </S.Card>
           ))}
         </S.CardList>
@@ -50,7 +49,7 @@ const Locations: React.FC<ReturnType<typeof useFetchLocations>> = ({
       <S.CardList>
         {data.map((location) => (
           <S.Card
-            onClick={() => console.log(location.id)}
+            onClick={() => setLocation(location.id)}
             actionIcon={<Pencil />}
             title={location.name}
             key={location.id}
