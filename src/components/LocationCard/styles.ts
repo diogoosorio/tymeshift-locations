@@ -31,8 +31,7 @@ const CardActionArea = styled(MuiCardActionArea)<{ $loading?: boolean }>`
   }
 
   ${(props) => (props.$loading ? '' : css`
-    :hover,
-    :focus {
+    :hover {
       background-color: rgb(246, 246, 246);
     }
   `)}
@@ -68,8 +67,7 @@ const IconContainer = styled.div`
   border-radius: 50%;
   opacity: 0;
 
-  ${CardActionArea}:hover &,
-  ${CardActionArea}:focus & {
+  ${CardActionArea}:hover & {
     opacity: 1;
   }
 
