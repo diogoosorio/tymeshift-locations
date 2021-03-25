@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import {
-  BrowserRouter as Router, Switch, Route, Redirect,
+  HashRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
 
 import ListLocations from './containers/ListLocations';

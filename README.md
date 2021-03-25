@@ -2,7 +2,7 @@
 
 ![Github Actions](https://github.com/diogoosorio/tymeshift-locations/workflows/CI/CD/badge.svg)
 
-https://diogoosorio.github.io/tymeshift-locations
+Live deployment: https://diogoosorio.github.io/tymeshift-locations
 
 This was my submission to the [Tymeshift recruitment challenge](https://github.com/Tymeshift/react-code-test).
 
