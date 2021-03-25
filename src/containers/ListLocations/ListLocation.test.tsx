@@ -5,7 +5,6 @@ import { mocked } from 'ts-jest/utils';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 
 import { fetchLocations } from '../../services/locations';
 import ListLocations from './ListLocations';
@@ -67,12 +66,30 @@ describe('<ListLocations />', () => {
     });
   });
 
+  describe('when a valid location id is provided in the URL', () => {
+    it('loads the location detail modal', async () => {
+      mockedFetchLocations.mockResolvedValueOnce(locations);
+
+      render(
+        <Router initialEntries={['/locations/2']}>
+          <Switch>
+            <Route path={['/locations/:id', '/locations']} exact component={ListLocations} />
+          </Switch>
+        </Router>,
+      );
+
+      const modalDescription = await waitFor(() => screen.getByText(/let's-a go/i));
+      expect(modalDescription).toBeInTheDocument();
+
+      // close the modal
+      userEvent.click(screen.getByRole('button', { name: 'Done' }));
+      await waitFor(() => expect(modalDescription).not.toBeInTheDocument());
+    });
+  });
+
   describe('when an invalid location id is provided in the URL', () => {
     it('redirects the user to the location list URL instead', async () => {
       mockedFetchLocations.mockResolvedValueOnce(locations);
-
-      const history = createMemoryHistory();
-      history.push('/locations/invalid-id');
 
       render(
         <Router initialEntries={['/locations/invalid-id']}>
@@ -90,7 +107,26 @@ describe('<ListLocations />', () => {
   });
 
   describe('when the user clicks on a location', () => {
-    it.todo('changes the URL to the detail page');
-    it.todo('renders the location detail modal');
+    it('changes the URL to the location detail page and renders the modal', async () => {
+      mockedFetchLocations.mockResolvedValueOnce(locations);
+
+      render(
+        <Router initialEntries={['/locations']}>
+          <Switch>
+            <Route path={['/locations', '/locations/:id']} exact component={ListLocations} />
+          </Switch>
+        </Router>,
+      );
+
+      const locationCard = await waitFor(() => screen.getByText('Luigi'));
+      userEvent.click(locationCard);
+
+      const modalDescription = await waitFor(() => screen.getByText(/let's-a go/i));
+      expect(modalDescription).toBeInTheDocument();
+
+      // close the modal
+      userEvent.click(screen.getByRole('button', { name: 'Done' }));
+      await waitFor(() => expect(modalDescription).not.toBeInTheDocument());
+    });
   });
 });

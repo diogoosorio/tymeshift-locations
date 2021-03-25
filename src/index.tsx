@@ -17,9 +17,11 @@ ReactDOM.render(
         <CssBaseline />
 
         <Switch>
-          <Route path={[Routes.LocationList, Routes.LocationDetail]} exact>
-            <ListLocations />
-          </Route>
+          <Route
+            path={[Routes.LocationList, Routes.LocationDetail]}
+            component={ListLocations}
+            exact
+          />
           <Route path="/" exact>
             <Redirect to={Routes.LocationList} />
           </Route>

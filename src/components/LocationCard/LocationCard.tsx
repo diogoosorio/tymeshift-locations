@@ -3,12 +3,10 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 
-import IconList from '../IconList';
-import { Pencil, Users, Timezone } from '../../icons';
+import { Pencil } from '../../icons';
 import { LocationCardProps } from './types';
 import * as S from './styles';
-
-const DateFormat = "h:ma ('GMT'ZZ)";
+import LocationIcons from '../LocationIcons';
 
 const LoadingLocationCard: React.FC<Pick<LocationCardProps, 'className'>> = ({ className }) => (
   <S.Card className={className} variant="outlined">
@@ -36,15 +34,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
         disableTypography
       />
       <S.CardContent data-testid="icon-list">
-        <IconList>
-          <IconList.Item icon={<Users />} text={`${location.userCount} Users`} />
-          {location.createdAt && (
-            <IconList.Item
-              icon={<Timezone />}
-              text={`${location.createdAt.toFormat(DateFormat)}`}
-            />
-          )}
-        </IconList>
+        <LocationIcons location={location} />
       </S.CardContent>
     </S.CardActionArea>
   </S.Card>

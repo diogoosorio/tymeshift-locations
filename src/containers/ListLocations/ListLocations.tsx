@@ -3,6 +3,7 @@ import { useParams, useHistory, Redirect } from 'react-router-dom';
 
 import Header from '../../components/Header';
 import LoadError from '../../components/LoadError';
+import LocationModal from '../../components/LocationModal';
 import { Routes } from '../../constants';
 import { useFetchLocations } from './hooks';
 import * as S from './styles';
@@ -52,12 +53,15 @@ const ListLocations: React.FC = () => {
   } = useFetchLocations();
 
   const setSelectedLocation = useCallback((locationId: string) => {
-    history.push(`${Routes.LocationList}/${parseInt(locationId, 10)}`);
+    history.push(`${Routes.LocationList}/${encodeURI(locationId)}`);
   }, [history]);
+
+  const closeModal = useCallback(() => history.push(Routes.LocationList), [history]);
 
   const selectedLocation = locations?.find((location) => location.id === id);
   const invalidLocationId = !loading && id && !selectedLocation;
 
+  // TODO: This should probably be a 404 page?
   if (invalidLocationId) {
     return <Redirect to={Routes.LocationList} />;
   }
@@ -76,10 +80,7 @@ const ListLocations: React.FC = () => {
       </S.ContentContainer>
 
       {selectedLocation && (
-      <h2>
-        Selected:
-        {selectedLocation.id}
-      </h2>
+        <LocationModal onCloseClick={closeModal} location={selectedLocation} open />
       )}
     </>
   );
