@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ListItem from '@material-ui/core/ListItem';
+import { ListItem } from '@material-ui/core';
 
 import * as S from './styles';
 import { IconListItemProps, LocationIconsProps } from './types';

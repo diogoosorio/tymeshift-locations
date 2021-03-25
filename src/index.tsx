@@ -11,24 +11,22 @@ import theme from './theme';
 import { Routes } from './constants';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+  <Router>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
 
-        <Switch>
-          <Route
-            path={[Routes.LocationList, Routes.LocationDetail]}
-            component={ListLocations}
-            exact
-          />
-          <Route path="/" exact>
-            <Redirect to={Routes.LocationList} />
-          </Route>
-        </Switch>
-      </ThemeProvider>
-    </Router>
-  </React.StrictMode>,
+      <Switch>
+        <Route
+          path={[Routes.LocationList, Routes.LocationDetail]}
+          component={ListLocations}
+          exact
+        />
+        <Route path="/" exact>
+          <Redirect to={Routes.LocationList} />
+        </Route>
+      </Switch>
+    </ThemeProvider>
+  </Router>,
   document.getElementById('root'),
 );
 

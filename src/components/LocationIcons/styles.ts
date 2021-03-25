@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-import MuiList from '@material-ui/core/List';
-import MuiListItemIcon from '@material-ui/core/ListItemIcon';
-import MuiListItemText from '@material-ui/core/ListItemText';
+import {
+  List as MuiList,
+  ListItemIcon as MuiListItemIcon,
+  ListItemText as MuiListItemText,
+} from '@material-ui/core';
 
 const List = styled(MuiList)`
   .MuiListItem-root {

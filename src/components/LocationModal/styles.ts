@@ -2,7 +2,10 @@ import styled from 'styled-components';
 
 import {
   Button,
-  Dialog, DialogActions, DialogContent, IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  IconButton,
 } from '@material-ui/core';
 
 const Modal = styled(Dialog)`
