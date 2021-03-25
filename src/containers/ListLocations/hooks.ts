@@ -2,36 +2,37 @@ import { useState, useEffect, useCallback } from 'react';
 import { fetchLocations } from '../../services/locations';
 
 import { Location } from '../../types';
-import { ExecutionResult } from './types';
+import { FetchLocationsResult } from './types';
 
-const useFetchLocations = (): ExecutionResult<ReadonlyArray<Location>> => {
-  const [loading, setLoading] = useState<boolean>(true);
+const useFetchLocations = (): FetchLocationsResult => {
+  const [loading, setLoading] = useState<'initial' | 'loading' | 'none'>('initial');
   const [error, setError] = useState<Error>();
-  const [data, setData] = useState<ReadonlyArray<Location>>([]);
-  const [refetch, setRefetch] = useState<boolean>(false);
+  const [locations, setLocations] = useState<Location[]>([]);
 
-  const triggerRefetch = useCallback(() => {
-    if (!loading) {
-      setRefetch(true);
-    }
-  }, [loading]);
-
-  useEffect(() => {
-    setRefetch(false);
-    setLoading(true);
+  const loadLocations = useCallback(() => {
+    setLoading('loading');
     setError(undefined);
+    setLocations([]);
 
     fetchLocations()
-      .then((locations) => setData(locations))
+      .then((response) => setLocations([...response]))
       .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, [refetch]);
+      .finally(() => setLoading('none'));
+  }, []);
+
+  const reloadLocations = useCallback(() => {
+    if (loading === 'none') {
+      loadLocations();
+    }
+  }, [loadLocations, loading]);
+
+  useEffect(() => loadLocations(), [loadLocations]);
 
   return {
-    loading,
+    loading: loading !== 'none',
     error,
-    data,
-    refetch: triggerRefetch,
+    locations,
+    refetch: reloadLocations,
   };
 };
 

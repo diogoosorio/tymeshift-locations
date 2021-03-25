@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { render } from '@testing-library/react';
 
 import Header from './Header';
@@ -19,9 +20,11 @@ describe('<Header />', () => {
 
       expect(container).toMatchInlineSnapshot(`
         <div>
-          <header>
+          <header
+            class="sc-bdfBwQ kDXeFS"
+          >
             <h1
-              class="MuiTypography-root MuiTypography-body1"
+              class="MuiTypography-root MuiTypography-h1"
             >
               Big title
             </h1>

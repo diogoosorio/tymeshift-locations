@@ -7,7 +7,7 @@ interface IconListItemProps {
 
 interface IconListProps {
   className?: string;
-  children: React.ReactElement<IconListItemProps>[];
+  children: Array<React.ReactElement<IconListItemProps> | undefined>;
 }
 
 export type { IconListProps, IconListItemProps };

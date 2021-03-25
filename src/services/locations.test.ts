@@ -28,6 +28,29 @@ const mockedData = [
 ];
 
 describe('.fetchLocations', () => {
+  it('returns the list of locations', async () => {
+    mockedClient.get.mockResolvedValueOnce({
+      data: mockedData,
+    });
+
+    const locations = await fetchLocations();
+
+    expect(locations).toEqual([
+      expect.objectContaining({
+        id: '1',
+        name: 'Mario',
+        userCount: 10,
+        description: "It's me, Mario!",
+      }),
+      expect.objectContaining({
+        id: '2',
+        name: 'Luigi',
+        userCount: 20,
+        description: "Let's-a go!",
+      }),
+    ]);
+  });
+
   describe('when the creation date is invalid', () => {
     it('returns no creation date for the offending location', async () => {
       mockedClient.get.mockResolvedValueOnce({

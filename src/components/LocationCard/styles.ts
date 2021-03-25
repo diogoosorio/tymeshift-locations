@@ -17,7 +17,7 @@ const Card = styled(MuiCard)`
   border-radius: 2px;
 `;
 
-const CardActionArea = styled(MuiCardActionArea)`
+const CardActionArea = styled(MuiCardActionArea)<{ $loading?: boolean }>`
   ${transition}
   transition-property: background-color;
 
@@ -30,10 +30,12 @@ const CardActionArea = styled(MuiCardActionArea)`
     opacity: 0;
   }
 
-  :hover,
-  :focus {
-    background-color: rgb(246, 246, 246);
-  }
+  ${(props) => (props.$loading ? '' : css`
+    :hover,
+    :focus {
+      background-color: rgb(246, 246, 246);
+    }
+  `)}
 `;
 
 const CardHeader = styled(MuiCardHeader)`
