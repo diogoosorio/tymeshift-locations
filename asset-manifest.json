@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/tymeshift-locations/static/js/main.ad6c2f98.chunk.js",
-    "main.js.map": "/tymeshift-locations/static/js/main.ad6c2f98.chunk.js.map",
+    "main.js": "/tymeshift-locations/static/js/main.e17a0376.chunk.js",
+    "main.js.map": "/tymeshift-locations/static/js/main.e17a0376.chunk.js.map",
     "runtime-main.js": "/tymeshift-locations/static/js/runtime-main.7c5ecfab.js",
     "runtime-main.js.map": "/tymeshift-locations/static/js/runtime-main.7c5ecfab.js.map",
     "static/js/2.2969399d.chunk.js": "/tymeshift-locations/static/js/2.2969399d.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.7c5ecfab.js",
     "static/js/2.2969399d.chunk.js",
-    "static/js/main.ad6c2f98.chunk.js"
+    "static/js/main.e17a0376.chunk.js"
   ]
 }
