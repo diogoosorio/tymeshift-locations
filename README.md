@@ -69,3 +69,9 @@ With more time (and in a real World scenario), I'd probably focus on the followi
 * Work on the [app's telemetry](./src/infrastructure/logging.ts) as well as introducing a global unhandled error treatment logic.
 
 * Improve the HTTP client by introducing a retry policy for queries like the one I've built for the challenge.
+
+* I also didn't quite get the time requirement - I assumed it relates to the `createdAt` property returned by the API, but I'm failing to see how just the creation **time** (without the date) would be relevant. I formatted the time according to the design, but seemed an awfuly weird requirement.
+
+* As the app has a single page/container, I also assumed that storing the view counters in the container's state would suffice (which would mean the loss of that state if/when the container gets unmounted). 
+
+  I'm unsure if you peepz were expecting to see that state stored in such a way that it'd be retained if/when the container gets unmounted (e.g. a React context or use a state management library, for example).
