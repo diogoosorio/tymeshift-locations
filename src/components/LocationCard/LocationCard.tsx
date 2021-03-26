@@ -26,7 +26,7 @@ const LoadingLocationCard: React.FC<Pick<LocationCardProps, 'className'>> = ({ c
 const LocationCard: React.FC<LocationCardProps> = ({
   className, location, onClick,
 }) => (
-  <S.Card className={className} variant="outlined">
+  <S.Card className={className} variant="outlined" data-testid={`location-card-${location.id}`}>
     <S.CardActionArea onClick={onClick}>
       <S.CardHeader
         title={<Typography variant="h5" component="h5">{location.name}</Typography>}

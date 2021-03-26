@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 
 import Header from '../../components/Header';
@@ -10,7 +10,7 @@ import * as S from './styles';
 import { LocationListContentProps } from './types';
 
 const Content: React.FC<LocationListContentProps> = ({
-  loading, locations, error, refetch, setLocationId,
+  loading, locations, error, refetch, setLocationId, views,
 }) => {
   if (error) {
     return <LoadError onRetryClick={refetch} />;
@@ -36,7 +36,7 @@ const Content: React.FC<LocationListContentProps> = ({
       {locations?.map((location) => (
         <S.LocationCard
           key={location.id}
-          location={location}
+          location={{ ...location, views: views[location.id] || 0 }}
           onClick={() => setLocationId(location.id)}
         />
       ))}
@@ -47,14 +47,18 @@ const Content: React.FC<LocationListContentProps> = ({
 const ListLocations: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const history = useHistory();
+  const [views, setViews] = useState<Record<string, number>>(id ? { [id]: 1 } : {});
 
   const {
     loading, error, locations, refetch,
   } = useFetchLocations();
 
-  const setSelectedLocation = useCallback((locationId: string) => {
+  const setLocationId = useCallback((locationId: string) => {
+    const locationViews = views[locationId] || 0;
+    setViews({ ...views, [locationId]: locationViews + 1 });
+
     history.push(`${Routes.LocationList}/${encodeURI(locationId)}`);
-  }, [history]);
+  }, [history, views]);
 
   const closeModal = useCallback(() => history.push(Routes.LocationList), [history]);
 
@@ -71,16 +75,21 @@ const ListLocations: React.FC = () => {
       <Header title="Acme locations" subtitle="All locations" />
       <S.ContentContainer>
         <Content
+          views={views}
           loading={loading}
           locations={locations}
           error={error}
           refetch={refetch}
-          setLocationId={setSelectedLocation}
+          setLocationId={setLocationId}
         />
       </S.ContentContainer>
 
       {selectedLocation && (
-        <LocationModal onCloseClick={closeModal} location={selectedLocation} open />
+        <LocationModal
+          open
+          onCloseClick={closeModal}
+          location={{ ...selectedLocation, views: views[selectedLocation.id] || 0 }}
+        />
       )}
     </>
   );

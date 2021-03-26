@@ -4,7 +4,7 @@ import { ListItem } from '@material-ui/core';
 
 import * as S from './styles';
 import { IconListItemProps, LocationIconsProps } from './types';
-import { Timezone, Users } from '../../icons';
+import { Eye, Timezone, Users } from '../../icons';
 
 const DateFormat = "h:ma ('GMT'ZZ)";
 
@@ -21,6 +21,7 @@ const LocationIcons: React.FC<LocationIconsProps> = ({ location, className }) =>
     {location.createdAt && (
       <Item icon={<Timezone />} text={`${location.createdAt.toFormat(DateFormat)}`} />
     )}
+    <Item icon={<Eye />} text={`${location.views} Views`} />
   </S.List>
 );
 

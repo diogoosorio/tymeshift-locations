@@ -4,7 +4,7 @@ interface LocationCardProps {
   className?: string;
   onClick?: () => void;
   loading?: boolean;
-  location: Location;
+  location: Location & { views: number };
 }
 
 export type { LocationCardProps };

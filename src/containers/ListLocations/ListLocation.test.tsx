@@ -2,7 +2,9 @@ import React from 'react';
 
 import { DateTime } from 'luxon';
 import { mocked } from 'ts-jest/utils';
-import { render, screen, waitFor } from '@testing-library/react';
+import {
+  getByText, render, screen, waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -78,8 +80,11 @@ describe('<ListLocations />', () => {
         </Router>,
       );
 
-      const modalDescription = await waitFor(() => screen.getByText(/let's-a go/i));
+      const modal = await waitFor(() => screen.getByTestId('location-modal'));
+      const modalDescription = getByText(modal, /let's-a go/i);
+      const modalCounter = getByText(modal, /1 views/i);
       expect(modalDescription).toBeInTheDocument();
+      expect(modalCounter).toBeInTheDocument();
 
       // close the modal
       userEvent.click(screen.getByRole('button', { name: 'Done' }));
@@ -107,7 +112,7 @@ describe('<ListLocations />', () => {
   });
 
   describe('when the user clicks on a location', () => {
-    it('changes the URL to the location detail page and renders the modal', async () => {
+    it('renders the location detail modal', async () => {
       mockedFetchLocations.mockResolvedValueOnce(locations);
 
       render(
@@ -118,15 +123,24 @@ describe('<ListLocations />', () => {
         </Router>,
       );
 
-      const locationCard = await waitFor(() => screen.getByText('Luigi'));
-      userEvent.click(locationCard);
+      const locationCard = await waitFor(() => screen.getByTestId('location-card-2'));
+      const locationName = getByText(locationCard, 'Luigi');
+      const locationCounter = getByText(locationCard, /0 views/i);
+      userEvent.click(locationName);
 
-      const modalDescription = await waitFor(() => screen.getByText(/let's-a go/i));
+      const modal = await waitFor(() => screen.getByTestId('location-modal'));
+      const modalDescription = getByText(modal, /let's-a go/i);
+      const modalCounter = getByText(modal, /1 views/i);
+
       expect(modalDescription).toBeInTheDocument();
+      expect(modalCounter).toBeInTheDocument();
 
       // close the modal
       userEvent.click(screen.getByRole('button', { name: 'Done' }));
       await waitFor(() => expect(modalDescription).not.toBeInTheDocument());
+
+      // counter on the card was also increment
+      expect(locationCounter.textContent).toEqual('1 Views');
     });
   });
 });

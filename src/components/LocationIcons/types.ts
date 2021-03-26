@@ -8,7 +8,7 @@ interface IconListItemProps {
 
 interface LocationIconsProps {
   className?: string;
-  location: Location;
+  location: Location & { views: number };
 }
 
 export type { LocationIconsProps, IconListItemProps };

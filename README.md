@@ -69,13 +69,3 @@ With more time (and in a real World scenario), I'd probably focus on the followi
 * Work on the [app's telemetry](./src/infrastructure/logging.ts) as well as introducing a global unhandled error treatment logic.
 
 * Improve the HTTP client by introducing a retry policy for queries like the one I've built for the challenge.
-
-## Open Questions
-
-I've faced some questions during the challenge that I've plowed through, but in a real World scenario I'd definitely ask around aobut their logic:
-
-* The UI has a "number of views" counter that I couldn't determine where the corresponding data should come from, so I omitted that field.
-
-* The same for the location time thing. I've used the `createdAt` property from the API, but seemed a bit random showing the time the location was created, but without the corresponding date (?).
-
-And I think that's it. Thanks for reading this through. :)

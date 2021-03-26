@@ -8,7 +8,7 @@ import * as S from './styles';
 import { Close } from '../../icons';
 
 const LocationModal: React.FC<LocationModalProps> = ({ open, location, onCloseClick }) => (
-  <S.Modal open={open} aria-labelledby="location-modal-title">
+  <S.Modal open={open} aria-labelledby="location-modal-title" data-testid="location-modal">
 
     <S.ModalHeader id="location-modal-title">
       <Typography variant="h3">{location.name}</Typography>

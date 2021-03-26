@@ -9,6 +9,7 @@ interface FetchLocationsResult {
 
 interface LocationListContentProps extends FetchLocationsResult{
   setLocationId: (id: string) => void;
+  views: Record<string, number>;
 }
 
 export type { FetchLocationsResult, LocationListContentProps };
